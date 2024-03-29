@@ -25,7 +25,8 @@ jobs:
 
       - name: Calculate next tag
         id: next-tag
-        run: echo "::set-output name=tag::$(python .github/scripts/calculate_next_tag.py)"
+        # run: echo "::set-output name=tag::$(python .github/scripts/calculate_next_tag.py)"
+        run: echo "tag=$(python .github/scripts/calculate_next_tag.py)" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Generate release notes
@@ -35,7 +36,8 @@ jobs:
           NOTES="${NOTES//'%'/'%25'}"
           NOTES="${NOTES//$'\n'/'%0A'}"
           NOTES="${NOTES//$'\r'/'%0D'}"
-          echo "::set-output name=notes::$NOTES"
+          echo "notes=$NOTES" >> $GITHUB_OUTPUT
+        # echo "::set-output name=notes::$NOTES"
 
       - name: Create the new tag
         run: |
