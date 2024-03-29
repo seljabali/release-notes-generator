@@ -52,12 +52,18 @@ jobs:
       #       echo "EOF" >> $GITHUB_OUTPUT
       #     done
 
-      - name: Generate release notes
+      - name: Generate release notes and encode
         id: generate-notes
         run: |
-          echo "notes<<EOF" >> $GITHUB_OUTPUT
-          python .github/scripts/generate_release_notes.py'
-          echo "EOF" >> $GITHUB_OUTPUT
+          NOTES=$(python .github/scripts/generate_release_notes.py | base64)
+          echo "notes=$NOTES" >> $GITHUB_OUTPUT
+
+      # - name: Generate release notes
+      #   id: generate-notes
+      #   run: |
+      #     echo "notes<<EOF" >> $GITHUB_OUTPUT
+      #     python .github/scripts/generate_release_notes.py'
+      #     echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create the new tag
         run: |
