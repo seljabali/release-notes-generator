@@ -39,18 +39,18 @@ jobs:
           echo "notes=$NOTES" >> $GITHUB_OUTPUT
         # echo "::set-output name=notes::$NOTES"
 
-      - name: Generate release notes v2
-        id: generate-notes-v2
-        run: |
-          NOTES=$(python .github/scripts/generate_release_notes.py')
-          # Split NOTES into an array of lines
-          IFS=$'\n' read -d '' -r -a lines <<< "$NOTES"
-          # Append each line individually
-          for line in "${lines[@]}"; do
-            echo "notes<<EOF" >> $GITHUB_OUTPUT
-            echo "$line" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          done
+      # - name: Generate release notes v2
+      #   id: generate-notes-v2
+      #   run: |
+      #     NOTES=$(python .github/scripts/generate_release_notes.py')
+      #     # Split NOTES into an array of lines
+      #     IFS=$'\n' read -d '' -r -a lines <<< "$NOTES"
+      #     # Append each line individually
+      #     for line in "${lines[@]}"; do
+      #       echo "notes<<EOF" >> $GITHUB_OUTPUT
+      #       echo "$line" >> $GITHUB_OUTPUT
+      #       echo "EOF" >> $GITHUB_OUTPUT
+      #     done
 
       - name: Generate release notes
         id: generate-notes
