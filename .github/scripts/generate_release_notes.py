@@ -58,6 +58,7 @@ def generate_release_notes():
     authorsSet = set()
     if commit_logs:
         for log in commit_logs:
+            print(log)
             hash, author, message = log.split(' -- ')
             # Attempt to extract PR number from commit message
             pr_match = re.search(r'\(#(\d+)\)', message)
