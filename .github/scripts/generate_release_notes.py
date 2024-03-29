@@ -22,7 +22,7 @@ def get_latest_tag():
     return valid_tags[0] if valid_tags else None
 
 def calculate_next_tag():
-    now = datetime.now(datetime.UTC)
+    now = datetime.now(datetime.timezone.utc)
     year, week, _ = now.isocalendar()
     week_str = f"{week:02d}"  # Ensure week is two digits
 
