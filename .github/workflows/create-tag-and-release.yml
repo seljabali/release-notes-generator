@@ -1,0 +1,67 @@
+name: Create Tag & Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tag-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Necessary for scripts to access all tags and .github/release.yml
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install PyYAML
+
+      - name: Calculate next tag
+        id: next-tag
+        run: echo "::set-output name=tag::$(python .github/scripts/calculate_next_tag.py)"
+        shell: bash
+
+      - name: Generate release notes v1
+        id: generate-notes-v1
+        run: echo "::set-output name=notes::$(python .github/scripts/generate_release_notes.py .github/release.yml)"
+        shell: bash
+            
+      - name: Generate release notes v2
+        id: generate-notes-v2
+        run: |
+          NOTES=$(python .github/scripts/generate_release_notes.py | jq -aRs .)
+          echo "::set-output name=notes::$NOTES"
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate release notes v3
+        id: generate-notes
+        run: |
+          NOTES=$(python .github/scripts/generate_release_notes.py)
+          NOTES="${NOTES//'%'/'%25'}"
+          NOTES="${NOTES//$'\n'/'%0A'}"
+          NOTES="${NOTES//$'\r'/'%0D'}"
+          echo "::set-output name=notes::$NOTES"
+
+      - name: Create the new tag
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag ${{ steps.next-tag.outputs.tag }}
+          git push origin ${{ steps.next-tag.outputs.tag }}
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.next-tag.outputs.tag }}
+          release_name: ${{ steps.next-tag.outputs.tag }}
+          body: ${{ steps.generate-notes.outputs.notes }}
+          draft: false
+          prerelease: false
