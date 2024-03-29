@@ -25,21 +25,7 @@ jobs:
         run: echo "::set-output name=tag::$(python .github/scripts/calculate_next_tag.py)"
         shell: bash
 
-      - name: Generate release notes v1
-        id: generate-notes-v1
-        run: echo "::set-output name=notes::$(python .github/scripts/generate_release_notes.py .github/release.yml)"
-        shell: bash
-            
-      - name: Generate release notes v2
-        id: generate-notes-v2
-        run: |
-          NOTES=$(python .github/scripts/generate_release_notes.py | jq -aRs .)
-          echo "::set-output name=notes::$NOTES"
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate release notes v3
+      - name: Generate release notes
         id: generate-notes
         run: |
           NOTES=$(python .github/scripts/generate_release_notes.py)
