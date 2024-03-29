@@ -64,7 +64,7 @@ def generate_release_notes():
             # Attempt to extract PR number from commit message
             pr_match = re.search(r'\(#(\d+)\)', message)
             pr_number = pr_match.group(1) if pr_match else ''
-            notes += f"* {message} by {author}\n"
+            notes += f"* {message}\n"
             authorsSet.add(author)
     else:
         notes += "No changes were made since the last release.\n"
