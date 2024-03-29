@@ -3,7 +3,7 @@ import re
 import sys
 from datetime import datetime
 
-repoUrl = "https://github.com/seljabali/super-duper-computing-machine/"
+repoUrl = "https://github.com/seljabali/super-duper-computing-machine"
 devsMap = {'Sami Eljabali': '@seljabali'}
 
 def getAuthorHandlesFromNames(authors_set):
