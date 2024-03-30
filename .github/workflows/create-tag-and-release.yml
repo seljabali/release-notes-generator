@@ -80,13 +80,16 @@ jobs:
           git tag ${{ steps.next-tag.outputs.tag }}
           git push origin ${{ steps.next-tag.outputs.tag }}
 
-      - name: Create Release
-        uses: actions/create-release@v1
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
         with:
-          tag_name: ${{ steps.next-tag.outputs.tag }}
-          release_name: ${{ steps.next-tag.outputs.tag }}
-          body: ${{ steps.generate-notes.outputs.notes }}
           draft: false
           prerelease: false
+          generate_release_notes: false          
+          make_latest: true
+          tag_name: ${{ steps.next-tag.outputs.tag }}
+          name: ${{ steps.next-tag.outputs.tag }}
+          body: ${{ steps.generate-notes.outputs.notes }}
