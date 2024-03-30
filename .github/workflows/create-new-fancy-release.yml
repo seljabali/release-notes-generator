@@ -48,4 +48,4 @@ jobs:
           body: ""
           tag_name: ${{ steps.next-tag.outputs.tag }}
           name: ${{ steps.next-tag.outputs.tag }}
-          # body: ${{ steps.generate-notes.outputs.notes }}
+          # body: ${{ steps.generate-notes.outputs.notes }} 
