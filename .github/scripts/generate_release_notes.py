@@ -10,8 +10,9 @@ def getAuthorHandlesFromNames(authors_set):
     values = []
     for author in authors_set:
         if author in devsMap:
-            # If the key is found, append its value to the list
             values.append(devsMap[author])
+        else:
+            values.append(author)
     
     result_string = ', '.join(values)
     return result_string
