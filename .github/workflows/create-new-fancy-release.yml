@@ -1,0 +1,49 @@
+name: Create Tag & Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tag-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Necessary for scripts to access all tags and .github/release.yml
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install PyYAML
+
+      - name: Calculate next tag
+        id: next-tag
+        run: echo "tag=$(python .github/scripts/calculate_next_tag.py)" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Create the new tag
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag ${{ steps.next-tag.outputs.tag }}
+          git push origin ${{ steps.next-tag.outputs.tag }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
+        with:
+          draft: false
+          prerelease: false
+          make_latest: true
+          generate_release_notes: true
+          tag_name: ${{ steps.next-tag.outputs.tag }}
+          release_name: ${{ steps.next-tag.outputs.tag }}
+          # body: ${{ steps.generate-notes.outputs.notes }}
