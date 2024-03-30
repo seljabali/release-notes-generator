@@ -1,1 +1,1 @@
-## Super Duper Computing machine
+## Super Duper Computing Machine
