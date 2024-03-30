@@ -42,7 +42,7 @@ jobs:
         with:
           draft: false
           prerelease: false
-          append_body: false
+          append_body: true
           make_latest: true
           generate_release_notes: true
           body: ""
