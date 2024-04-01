@@ -3,8 +3,9 @@ import re
 import sys
 from datetime import datetime, timezone 
 
+dependabot = 'dependabot[bot]'
 repoUrl = "https://github.com/seljabali/super-duper-computing-machine"
-devsMap = {'Sami Eljabali': '@seljabali', 'dependabot[bot]': '@dependabot'}
+devsMap = {'Sami Eljabali': '@seljabali', dependabot: '@dependabot'}
 
 def getAuthorHandlesFromNames(authors_set):
     values = []
@@ -59,18 +60,26 @@ def generate_release_notes():
     notes = "### ✨ Enhancements\n"
     commit_logs = get_commits_since_last_tag()
     authorsSet = set()
+    dependabotNotes = ''
     if commit_logs:
         for log in commit_logs:
             hash, author, message = log.split(' -- ')
             # Attempt to extract PR number from commit message
             pr_match = re.search(r'\(#(\d+)\)', message)
             pr_number = pr_match.group(1) if pr_match else ''
-            notes += f"* {message}\n"
+            commitNote = f"* {message}\n"
+            if dependabot in author:
+                dependabotNotes += commitNote
+            else:
+                notes += commitNote
             authorsSet.add(author)
     else:
         notes += "No changes were made since the last release.\n"
 
     notes += "\n\n"
+    if dependabotNotes != "":
+        notes += "### 🔨 Dependencies\n"
+        notes += dependabotNotes
     notes += "Thanks to " + getAuthorHandlesFromNames(authorsSet) + "\n\n"
     notes += "Change log " + repoUrl + "/compare/" + get_latest_tag() + "..." + calculate_next_tag()
     return notes
