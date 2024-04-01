@@ -76,12 +76,12 @@ def generate_release_notes():
     else:
         notes += "No changes were made since the last release.\n"
 
-    notes += "\n\n"
     if dependabotNotes != "":
         notes += "### 🔨 Dependencies\n"
         notes += dependabotNotes
-    notes += "Thanks to " + getAuthorHandlesFromNames(authorsSet) + "\n\n"
-    notes += "Change log " + repoUrl + "/compare/" + get_latest_tag() + "..." + calculate_next_tag()
+
+    notes += "\n\nThanks to " + getAuthorHandlesFromNames(authorsSet)
+    notes += "\n\nChange log " + repoUrl + "/compare/" + get_latest_tag() + "..." + calculate_next_tag()
     return notes
 
 if __name__ == "__main__":
