@@ -4,7 +4,7 @@ import sys
 from datetime import datetime, timezone 
 
 repoUrl = "https://github.com/seljabali/super-duper-computing-machine"
-devsMap = {'Sami Eljabali': '@seljabali'}
+devsMap = {'Sami Eljabali': '@seljabali', 'dependabot[bot]' : '@dependabot'}
 
 def getAuthorHandlesFromNames(authors_set):
     values = []
