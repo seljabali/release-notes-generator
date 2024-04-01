@@ -56,7 +56,7 @@ def get_commits_since_last_tag():
     return commit_logs
 
 def generate_release_notes():
-    notes = "## ✨ Enhancements\n"
+    notes = "### ✨ Enhancements\n"
     commit_logs = get_commits_since_last_tag()
     authorsSet = set()
     if commit_logs:
