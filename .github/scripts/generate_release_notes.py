@@ -4,7 +4,7 @@ import sys
 from datetime import datetime, timezone 
 
 dependabot = 'dependabot[bot]'
-repoUrl = "https://github.com/seljabali/super-duper-computing-machine"
+repoUrl = "https://github.com/seljabali/release-notes-generator"
 devsMap = {'Sami Eljabali': '@seljabali', dependabot: '@dependabot'}
 
 def getAuthorHandlesFromNames(authors_set):
