@@ -1,1 +1,1 @@
-## Super Duper Computing Machine 🖥️
+## Release Notes Generator 🚀
