@@ -1,4 +1,4 @@
-name: Create Tag & Fancy Release
+name: Create Tag & Github Release
 
 on:
   workflow_dispatch:
