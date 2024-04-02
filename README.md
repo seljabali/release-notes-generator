@@ -1,6 +1,6 @@
 # Release Notes Generator 🚀
 
-### Scripts to automatically create tag + release notes based on changes from latest previous release. <br>
+### Scripts to automatically create tag + release notes. <br>
 
 * [Create Tag & Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-tag-and-release.yml)
   * Creates release notes via [Python script](https://github.com/seljabali/release-notes-generator/blob/main/.github/scripts/generate_release_notes.py).
