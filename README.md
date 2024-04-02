@@ -25,4 +25,5 @@ Example:
 ----------------
 
 Library dependencies:
-* [Action GH-Release by softprops](https://github.com/softprops/action-gh-release)
+* [Action GH-Release](https://github.com/softprops/action-gh-release)
+
