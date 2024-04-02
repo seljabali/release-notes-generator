@@ -4,13 +4,13 @@
 
 * [Create Tag & Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-tag-and-release.yml)
   * Creates release notes via [Python script](https://github.com/seljabali/release-notes-generator/blob/main/.github/scripts/generate_release_notes.py).
-  * Most custimizable approach.
-  * Con is that it's rather brittle & needs altering when copying to new repo.
+  * Pro: most custimizable approach.
+  * Con: rather brittle & needs altering when copying to new repo.
 
 * [Create Tag & Github Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-new-github-release.yml)
   * Creates release notes via Github's [Release.yml](https://github.com/seljabali/release-notes-generator/blob/main/.github/release.yml). [Documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes)
-  * Most reusable approach..
-  * Con is that it does not capture commit changes, only PR changes.
+  * Pro: Most reusable approach.
+  * Con: does not capture commit changes, only PR changes.
 
 --------------
 
