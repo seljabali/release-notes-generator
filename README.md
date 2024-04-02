@@ -7,7 +7,7 @@
   * Most custimizable approach.
   * Con is that it's rather brittle & needs altering when copying to new repo.
 
-* [Create Tag & Fancy Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-new-fancy-release.yml)
+* [Create Tag & Github Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-new-github-release.yml)
   * Creates release notes via Github's [Release.yml](https://github.com/seljabali/release-notes-generator/blob/main/.github/release.yml).
   * Most reusable approach..
   * Con is that it does not capture commit changes, only PR changes.
