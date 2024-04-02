@@ -20,7 +20,7 @@ Tags are created in `yyyy-week-patch` format.
 - Patch: 0, 1, 2, etc. Every release increments patch count by 1.
 
 Example:
-* https://github.com/seljabali/release-notes-generator/releases/tag/2024.14.01
+* [2024.14.01](https://github.com/seljabali/release-notes-generator/releases/tag/2024.14.01)
 
 ----------------
 
