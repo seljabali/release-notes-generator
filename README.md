@@ -8,3 +8,13 @@
 * [Create Tag & Fancy Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-new-fancy-release.yml)
   * Creates release notes via Github's [Release.yml](https://github.com/seljabali/release-notes-generator/blob/main/.github/release.yml).
   * Con is that it does not capture commit changes, only PR changes.
+
+--------------
+
+Tags are created in yyyy-week-patch number format.
+- Year: 2024
+- Week in year: 1-52
+- Patch: 0,1,2,etc. Every release increments patch count by 1.
+
+Example:
+* https://github.com/seljabali/release-notes-generator/releases/tag/2024.14.01
