@@ -11,7 +11,7 @@
 
 --------------
 
-Tags are created in yyyy-week-patch number format.
+Tags are created in `yyyy-week-patch` format.
 - Year: 2024
 - Week in year: 1-52
 - Patch: 0,1,2,etc. Every release increments patch count by 1.
