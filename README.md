@@ -17,7 +17,7 @@
 Tags are created in `yyyy-week-patch` format.
 - Year: 2024
 - Week in year: 1-52
-- Patch: 0,1,2,etc. Every release increments patch count by 1.
+- Patch: 0, 1, 2, etc. Every release increments patch count by 1.
 
 Example:
 * https://github.com/seljabali/release-notes-generator/releases/tag/2024.14.01
