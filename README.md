@@ -21,3 +21,8 @@ Tags are created in `yyyy-week-patch` format.
 
 Example:
 * https://github.com/seljabali/release-notes-generator/releases/tag/2024.14.01
+
+----------------
+
+Dependencies:
+* [Action GH-Release by softprops](https://github.com/softprops/action-gh-release)
