@@ -28,24 +28,25 @@ jobs:
         run: echo "tag=$(python .github/scripts/calculate_next_tag.py)" >> $GITHUB_OUTPUT
         shell: bash
 
-      # - name: Generate release notes
-      #   id: generate-notes
-      #   run: |
-      #     NOTES=$(python .github/scripts/generate_release_notes.py)
-      #     NOTES="${NOTES//'%'/'%25'}"
-      #     NOTES="${NOTES//$'\n'/'%0A'}"
-      #     NOTES="${NOTES//$'\r'/'%0D'}"
-      #     echo "::set-output name=notes::$NOTES"
-
-      - name: Generate release notes v1
-        id: generate-notes-v1
+      - name: Generate release notes
+        id: generate-notes
         run: |
           NOTES=$(python .github/scripts/generate_release_notes.py)
           NOTES="${NOTES//'%'/'%25'}"
           NOTES="${NOTES//$'\n'/'%0A'}"
           NOTES="${NOTES//$'\r'/'%0D'}"
-          echo "notes=$NOTES" >> $GITHUB_OUTPUT
+          echo "::set-output name=notes::$NOTES"
+
+      # - name: Generate release notes v1
+      #   id: generate-notes-v1
+      #   run: |
+      #     NOTES=$(python .github/scripts/generate_release_notes.py)
+      #     NOTES="${NOTES//'%'/'%25'}"
+      #     NOTES="${NOTES//$'\n'/'%0A'}"
+      #     NOTES="${NOTES//$'\r'/'%0D'}"
+      #     echo "notes=$NOTES" >> $GITHUB_OUTPUT
       # https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+
       # - name: Generate release notes v2
       #   id: generate-notes-v2
       #   run: |
@@ -60,13 +61,9 @@ jobs:
       #     done
 
       # - name: Generate release notes and encode
-      # id: generate-notes-v3
-      # run: echo "notes=$(python .github/scripts/generate_release_notes.py)" >> $GITHUB_OUTPUT
-
-      # - name: Generate release notes and encode
       #   id: generate-notes-v3
       #   run: |
-      #     NOTES=$(python .github/scripts/generate_release_notes.py)
+      #     NOTES=$(python .github/scripts/generate_release_notes.py | base64)
       #     echo "notes=$NOTES" >> $GITHUB_OUTPUT
 
       # - name: Generate release notes
@@ -75,7 +72,6 @@ jobs:
       #     echo "notes<<EOF" >> $GITHUB_OUTPUT
       #     python .github/scripts/generate_release_notes.py'
       #     echo "EOF" >> $GITHUB_OUTPUT
-      # https://github.com/seljabali/release-notes-generator/actions/runs/8857213252/job/24324425228
 
       - name: Create the new tag
         run: |
