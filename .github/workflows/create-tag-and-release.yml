@@ -18,7 +18,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install dependencies
         run: pip install PyYAML
@@ -28,14 +28,14 @@ jobs:
         run: echo "tag=$(python .github/scripts/calculate_next_tag.py)" >> $GITHUB_OUTPUT
         shell: bash
 
-      - name: Generate release notes
-        id: generate-notes
-        run: |
-          NOTES=$(python .github/scripts/generate_release_notes.py)
-          NOTES="${NOTES//'%'/'%25'}"
-          NOTES="${NOTES//$'\n'/'%0A'}"
-          NOTES="${NOTES//$'\r'/'%0D'}"
-          echo "::set-output name=notes::$NOTES"
+      # - name: Generate release notes
+      #   id: generate-notes
+      #   run: |
+      #     NOTES=$(python .github/scripts/generate_release_notes.py)
+      #     NOTES="${NOTES//'%'/'%25'}"
+      #     NOTES="${NOTES//$'\n'/'%0A'}"
+      #     NOTES="${NOTES//$'\r'/'%0D'}"
+      #     echo "::set-output name=notes::$NOTES"
 
       # - name: Generate release notes v1
       #   id: generate-notes-v1
@@ -66,12 +66,12 @@ jobs:
       #     NOTES=$(python .github/scripts/generate_release_notes.py | base64)
       #     echo "notes=$NOTES" >> $GITHUB_OUTPUT
 
-      # - name: Generate release notes
-      #   id: generate-notes
-      #   run: |
-      #     echo "notes<<EOF" >> $GITHUB_OUTPUT
-      #     python .github/scripts/generate_release_notes.py'
-      #     echo "EOF" >> $GITHUB_OUTPUT
+      - name: Generate release notes
+        id: generate-notes
+        run: |
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          python .github/scripts/generate_release_notes.py'
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create the new tag
         run: |
@@ -80,15 +80,14 @@ jobs:
           git tag ${{ steps.next-tag.outputs.tag }}
           git push origin ${{ steps.next-tag.outputs.tag }}
 
-
       - name: Release
         uses: softprops/action-gh-release@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           draft: false
           prerelease: false
-          generate_release_notes: false          
+          generate_release_notes: false
           make_latest: true
           tag_name: ${{ steps.next-tag.outputs.tag }}
           name: ${{ steps.next-tag.outputs.tag }}
