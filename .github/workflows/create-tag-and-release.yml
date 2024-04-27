@@ -36,7 +36,6 @@ jobs:
       #     NOTES="${NOTES//$'\n'/'%0A'}"
       #     NOTES="${NOTES//$'\r'/'%0D'}"
       #     echo "::set-output name=notes::$NOTES"
-
       # - name: Generate release notes v1
       #   id: generate-notes-v1
       #   run: |
@@ -46,7 +45,6 @@ jobs:
       #     NOTES="${NOTES//$'\r'/'%0D'}"
       #     echo "notes=$NOTES" >> $GITHUB_OUTPUT
       # https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
-
       # - name: Generate release notes v2
       #   id: generate-notes-v2
       #   run: |
@@ -59,12 +57,12 @@ jobs:
       #       echo "$line" >> $GITHUB_OUTPUT
       #       echo "EOF" >> $GITHUB_OUTPUT
       #     done
-
       - name: Generate release notes and encode
         id: generate-notes-v3
-        run: |
-          NOTES=$(python .github/scripts/generate_release_notes.py)
-          echo "notes=$NOTES" >> $GITHUB_OUTPUT
+        run: echo "notes=$(python .github/scripts/generate_release_notes.py)" >> $GITHUB_OUTPUT
+        # run: |
+        # NOTES=$(python .github/scripts/generate_release_notes.py)
+        # echo "notes=$NOTES" >> $GITHUB_OUTPUT
 
       # - name: Generate release notes
       #   id: generate-notes
