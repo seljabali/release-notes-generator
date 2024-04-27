@@ -63,7 +63,7 @@ jobs:
       - name: Generate release notes and encode
         id: generate-notes-v3
         run: |
-          NOTES=$(python .github/scripts/generate_release_notes.py | base64)
+          NOTES=$(python .github/scripts/generate_release_notes.py)
           echo "notes=$NOTES" >> $GITHUB_OUTPUT
 
       # - name: Generate release notes
