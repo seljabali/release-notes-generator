@@ -60,18 +60,19 @@ jobs:
       #       echo "EOF" >> $GITHUB_OUTPUT
       #     done
 
-      # - name: Generate release notes and encode
-      #   id: generate-notes-v3
-      #   run: |
-      #     NOTES=$(python .github/scripts/generate_release_notes.py | base64)
-      #     echo "notes=$NOTES" >> $GITHUB_OUTPUT
-
-      - name: Generate release notes
-        id: generate-notes
+      - name: Generate release notes and encode
+        id: generate-notes-v3
         run: |
-          echo "notes<<EOF" >> $GITHUB_OUTPUT
-          python .github/scripts/generate_release_notes.py'
-          echo "EOF" >> $GITHUB_OUTPUT
+          NOTES=$(python .github/scripts/generate_release_notes.py | base64)
+          echo "notes=$NOTES" >> $GITHUB_OUTPUT
+
+      # - name: Generate release notes
+      #   id: generate-notes
+      #   run: |
+      #     echo "notes<<EOF" >> $GITHUB_OUTPUT
+      #     python .github/scripts/generate_release_notes.py'
+      #     echo "EOF" >> $GITHUB_OUTPUT
+      # https://github.com/seljabali/release-notes-generator/actions/runs/8857213252/job/24324425228
 
       - name: Create the new tag
         run: |
