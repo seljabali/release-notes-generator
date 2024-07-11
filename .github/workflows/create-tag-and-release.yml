@@ -1,4 +1,4 @@
-name: Create Tag & Release
+name: Create Tag & Release Notes
 
 on:
   workflow_dispatch:
