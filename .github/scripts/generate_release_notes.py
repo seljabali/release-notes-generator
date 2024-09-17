@@ -63,7 +63,13 @@ def generate_release_notes():
     dependabotNotes = ''
     if commit_logs:
         for log in commit_logs:
-            hash, author, message = log.split(' -- ')
+            commit_parts = log.split(' -- ')
+            if len(commit_parts) == 3:
+                hash_value, author, message = commit_parts
+            else:
+                # Handle the case where the log string doesn't split into 3 parts
+                print(f"Commit log unable to split: {log}")  # Debug print
+                hash_value, author, message = None, None, log
             # Attempt to extract PR number from commit message
             pr_match = re.search(r'\(#(\d+)\)', message)
             pr_number = pr_match.group(1) if pr_match else ''
