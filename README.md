@@ -1,6 +1,6 @@
 # Release Notes Generator 🚀
 
-### Scripts to automatically create tag + release notes. <br>
+### Scripts to automatically create tag + release notes: <br>
 
 * [Create Tag & Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-tag-and-release.yml)
   * Creates release notes via [Python script](https://github.com/seljabali/release-notes-generator/blob/main/.github/scripts/generate_release_notes.py).
@@ -10,7 +10,7 @@
 * [Create Tag & Github Release](https://github.com/seljabali/release-notes-generator/blob/main/.github/workflows/create-new-github-release.yml)
   * Creates release notes via Github's [Release.yml](https://github.com/seljabali/release-notes-generator/blob/main/.github/release.yml). See [documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes).
   * Pro: Most reusable approach.
-  * Con: does not capture commit changes, only PR changes.
+  * Con: does not capture commit changes, only PR changes. Hard to customize.
 
 --------------
 
