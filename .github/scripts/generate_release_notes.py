@@ -78,7 +78,8 @@ def generate_release_notes():
                 dependabotNotes += commitNote
             else:
                 notes += commitNote
-            authorsSet.add(author)
+            if author:
+                authorsSet.add(author)
     else:
         notes += "No changes were made since the last release.\n"
 
