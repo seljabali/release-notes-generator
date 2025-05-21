@@ -19,6 +19,9 @@ def getAuthorHandlesFromNames(authors_set):
     return result_string
 
 def get_latest_tag():
+    # Force fetch all tags from the remote
+    subprocess.run(['git', 'fetch', '--tags', '--force'], check=True)
+
     tags = subprocess.check_output(['git', 'tag', '--sort=-creatordate']).decode().strip().split('\n')
     valid_tags = [tag for tag in tags if re.match(r'\d{4}\.\d{2}\.\d{2}', tag)]
     return valid_tags[0] if valid_tags else None
@@ -45,14 +48,15 @@ def calculate_next_tag():
     return next_tag
 
 def get_commits_since_last_tag():
-    try:
-        latest_tag = subprocess.check_output(['git', 'describe', '--tags', '--abbrev=0'], stderr=subprocess.DEVNULL).decode().strip()
-        # print(f"Latest tag: {latest_tag}")  # Debug print
-    except subprocess.CalledProcessError:
-        latest_tag = ""
-        print("No tags found.")  # Debug print
+    latest_tag = get_latest_tag()
+    if not latest_tag:
+        print("No valid tags found.")
+        return []
 
-    commit_logs = subprocess.check_output(['git', 'log', f'{latest_tag}..HEAD', '--pretty=format:%H -- %an -- %s']).decode().strip().split('\n')
+    commit_logs = subprocess.check_output(
+        ['git', 'log', f'{latest_tag}..HEAD', '--pretty=format:%H -- %an -- %s']
+    ).decode().strip().split('\n')
+
     # print(f"Commit logs since last tag: {commit_logs}")  # Debug print
     return commit_logs
 
